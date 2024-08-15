@@ -8,6 +8,7 @@ import os
 import mlflow
 import optuna
 import pandas as pd
+import sklearn
 from dotenv import load_dotenv
 from prefect import flow, task
 from prefect.artifacts import create_table_artifact
@@ -71,8 +72,12 @@ def initiate_mlflow(experiment_name: str) -> int:
 
 @task(name="Fit Tuned Model")
 def fit_tuned_model(
-    study: optuna.study.Study, X_train, y_train, X_test, y_test
-) -> tuple:
+    study: optuna.study.Study,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+) -> tuple[sklearn.base.BaseEstimator, float]:
     """
     Fit the tuned model and log the metrics
 
@@ -114,7 +119,7 @@ def fit_tuned_model(
 
 
 @task
-def table_task(metrics):
+def table_task(metrics: dict[str, float]) -> None:
     """
     Create a table artifact with the model metrics
     """
@@ -132,7 +137,7 @@ def table_task(metrics):
 
 
 @flow(name="Training Model", log_prints=True)
-def main(trails: int):
+def main(trails: int) -> None:
     """
     Main flow for training the model
     """

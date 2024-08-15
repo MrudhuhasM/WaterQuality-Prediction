@@ -104,7 +104,7 @@ def load_registered_model(
 @task(name="Testing Registered Model", log_prints=True)
 def test_register_model(
     model: PyFuncModel, X_test: pd.DataFrame, y_test: pd.Series
-) -> dict:
+) -> dict[str, float]:
     """
     Test the registered model
 

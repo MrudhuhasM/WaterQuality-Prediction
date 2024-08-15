@@ -55,12 +55,12 @@ def load_registered_model(
 
 
 @app.get("/")
-def read_root():
+def read_root() -> dict[str, str]:
     return {"message": "Welcome to the water quality prediction API"}
 
 
 @app.post("/predict/")
-def predict(data: WaterQuality) -> dict:
+def predict(data: WaterQuality) -> dict[str, float]:
     model_name = os.getenv(
         "REGISTER_MODEL_NAME", default="water_quality_prediction"
     )
