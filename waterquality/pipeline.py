@@ -165,4 +165,9 @@ def main(trails: int) -> None:
 
 
 if __name__ == "__main__":
-    main(trails=30)
+    main.serve(  # type: ignore
+        flow_name="Training Model",
+        tags=["training", "model"],
+        parameters={"trails": 30},
+        version="0.1.0",
+    )
