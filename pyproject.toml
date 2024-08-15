@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "waterquality"
+version = "0.1.0"
+description = ""
+authors = ["MrudhuhasM <mrudhuhas@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+mlflow = "^2.15.1"
+prefect = {version = "^3.0.0rc16", allow-prereleases = true}
+scikit-learn = "^1.5.1"
+pandas = "^2.2.2"
+optuna = "^3.6.1"
+setuptools = "^72.1.0"
+python-dotenv = "^1.0.1"
+evidently = "^0.4.35"
+fastapi = "^0.112.0"
+pydantic = "^2.8.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+black = "^24.8.0"
+flake8 = "^7.1.1"
+mypy = "^1.11.1"
+isort = "^5.13.2"
+bandit = "^1.7.9"
+pytest = "^8.3.2"
+pre-commit = "^3.8.0"
+
+[tool.black]
+line-length = 79
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
