@@ -1,13 +1,10 @@
 import os
 
 import uvicorn
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from mlflow import pyfunc
 from mlflow.pyfunc import PyFuncModel
 from pydantic import BaseModel
-
-load_dotenv()
 
 app = FastAPI()
 
@@ -71,4 +68,6 @@ def predict(data: WaterQuality) -> dict[str, float]:
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    host = os.getenv("HOST", default="127.0.0.1")
+    port = int(os.getenv("PORT", default=8000))
+    uvicorn.run(app, host=host, port=port)
